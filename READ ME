@@ -1,0 +1,66 @@
+TVRAD - TV-Show RSS Auto Downloader
+
+Date : 2011
+Version : 0.1
+Require : Python
+
+DESCRIPTION
+-----------
+
+This software is born in order to automatize the download of tv-shows using torrent file. It uses rss feeds from eztv ( http://www.ezrss.it/ ) to know if a certain tv-show is available to be downloaded.
+More precisely it act like a Unix daemon and it's still an alpha version so it hasn't much features and his use isn't much user-friendly yet.
+This software is released with GPLv2 License. For now it's compatible only with Linux OS.
+
+
+BITTORRENT CLIENT SUPPORTED
+---------------------------
+
+To download torrent file you need one of this client bittorrent:
+
+Transmission
+Deluge
+Ktorrent
+QBittorrent
+
+
+HOW TO USE
+----------
+
+As a daemon it perform start and stop actions.
+
+To start the daemon open the shell, go where you've copied this directory and type :
+
+	python .py start
+
+to stop it 
+	
+	python .py stop
+
+Add/Remove/modify a tv-show
+For now the only way is to modify telefilm.xml that you can find in this direcory. This file is an XML file composed with entry like the following :
+
+	<serie>
+		<title>TITLE</title>
+		<quality>QUALITY</quality>
+	</serie>
+
+So if you want add a tv-show you must add an entry like this. The quality field is ued to know which version (Normal - 720p or 1080p ) of releases you want to download. 
+
+CHANGELOG
+---------
+
+VERSION 0.1
+
++ Act like an Unix Daemon
++ Compatible only with Linux OS
++ Only start and stop actions
++ Use XML file to store configuration, tv-shows list and client specifications
+
+
+LICENSE GPLv2
+
+CONTACT ME 
+----------
+
+alessandro.pischedda@gmail.com
+Alessandro Pischedda

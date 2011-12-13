@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tv-shows>
+	<serie>
+		<title>House</title>
+		<quality>720p</quality>
+	</serie>
+	<serie>
+		<title>Bones</title>
+		<quality>Normal</quality>
+	</serie>
+	<serie>
+		<title>How I Met Your Mother</title>
+		<quality>Normal</quality>
+	</serie>
+	<serie>
+		<title>House</title>
+		<quality>720p</quality>
+	</serie>
+	<serie>
+		<title>Dexter</title>
+		<quality>720p</quality>
+	</serie>
+	<serie>
+		<title>The Big Bang Theory</title>
+		<quality>Normal</quality>
+	</serie>
+	<serie>
+		<title>Blue Bloods</title>
+		<quality>Normal</quality>
+	</serie>
+	<serie>
+		<title>Chuck</title>
+		<quality>Normal</quality>
+	</serie>
+</tv-shows>

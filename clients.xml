@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<clients-list>
+	<client>
+		<name>transmission-gtk</name>
+		<command>transmission-gtk </command>
+	</client>
+	<client>
+		<name>deluge</name>
+		<command>deluge</command>
+	</client>
+	<client>
+		<name>qbittorrent</name>
+		<command>qbittorrent</command>
+	</client>
+	<client>
+		<name>ktorrent</name>
+		<command>ktorrent --silent</command>
+	</client>
+</clients-list>
