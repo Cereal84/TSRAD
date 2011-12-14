@@ -2,6 +2,7 @@
 try:
 	import os
 	from xml.dom.minidom import parseString
+	import clients
 except ImportError, e:
 	print "ERROR!!! Missing module : ",format(e.message[16:])
 	sys.exit(1)
@@ -39,3 +40,5 @@ def catalogo():
 		catalog.append(xmlData+xmlQuality)
 
 	return catalog
+
+
