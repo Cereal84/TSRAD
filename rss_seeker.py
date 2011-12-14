@@ -90,6 +90,7 @@ class RSS_Daemon(Daemon):
 		loop = True
 		delay = 0 #used to see in the future :)
 
+		self.__notify("Daemon Starting")
 		while(loop):
 
 			# DEBUG print "Check RSS: "+str(datetime.datetime.now())
@@ -161,8 +162,7 @@ class RSS_Daemon(Daemon):
 						# redirect the std output and std error to /dev/null because deluge give some message error
 						# which not depend on this script so we ignore the messages
 						# the last & is used to put it in background.
-						# NOTE it'll be removed, the daemon redirect all stream to null :)
-					
+						# NOTE it'll be removed, the daemon redirect all streams to null :)
 						shell_command = self.conf.get_cl_command()+" "+tv.get_torrent()+" >& /dev/null &"
 						self.__notify(message)		
 						os.system(shell_command)

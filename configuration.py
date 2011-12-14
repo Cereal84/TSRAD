@@ -42,27 +42,32 @@ class Setup:
 		string = string.replace(' ','')
 		return string
 
+	def __client(self):
+		clients_list = read_clients()
+		clients_supported = clients_list.keys()
+		find_clients(clients_list)
+		if len(clients_list.keys()) > 1:
+			client = choose_client(clients_list.keys())
+			self.set_client(client,clients_list[client])
+			self.save()
+		else:
+			print "There isn't bittorrent client supported installed on your system."
+			print "Install one of this clients:"
+			for name in clients_supported:
+				print name
+			sys.exit(2)
+
 	def __check_configuration(self):
 		# if there isn't the default client try to have one
 		if self.default_client == "":
 			print "Default client not found"
-			clients_list = read_clients()
-			clients_supported = clients_list.keys()
-			find_clients(clients_list)
-			if len(clients_list.keys()) > 1:
-				client = choose_client(clients_list.keys())
-				self.set_client(client,clients_list[client])
-				self.save()
-			else:
-				print "There isn't bittorrent client supported installed on your system."
-				print "Install one of this clients:"
-				for name in clients_supported:
-					print name
+			self.__client()
 	
 		# check inf the default client is still installed
 		if not os.path.exists("/usr/bin/"+self.get_client()):
 			print self.get_client()+" was set as default but isn't installed."
-			print "Please install it or choose another one."
+			print "Please install it or choose another one"
+			self.__client()
 			sys.exit(2)
 
 
@@ -161,7 +166,7 @@ class Setup:
 
 	def set_default(self):
 		""" Set the default values for configuration """
-		self.time = 30
+		self.time = 60
 		self.default_client = ""
 		self.client_command = ""
 		self.save()

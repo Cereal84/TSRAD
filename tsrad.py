@@ -21,8 +21,6 @@ if __name__ == "__main__":
 			daemon.stop()
 		elif 'restart' == sys.argv[1]:
 			daemon.restart()
-		elif 'configure' == sys.argv[1]:
-			print "Configuration"
 		else:
 			print "Unknown command"
 			sys.exit(2)

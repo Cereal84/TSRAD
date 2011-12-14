@@ -45,6 +45,7 @@ For now the only way is to modify telefilm.xml that you can find in this direcor
 	</serie>
 
 So if you want add a tv-show you must add an entry like this. The quality field is ued to know which version (Normal - 720p or 1080p ) of releases you want to download. 
+When you do it stop the daemon and when you've done restart it. This procedure is necessary to avoid inconsisten data.
 
 CHANGELOG
 ---------
