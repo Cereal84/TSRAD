@@ -22,6 +22,10 @@ alessandro.pischedda@gmail.com
 
 """
 
+__author__ = "Alessandro Pischedda"
+__date__ = "09-Dec-2011"
+
+
 # standard module
 try:
 	import os, sys
@@ -87,18 +91,15 @@ class RSS_Daemon(Daemon):
 	
 		last_feed = self.conf.get_last_feed()
 
-		loop = True
-		delay = 0 #used to see in the future :)
+		self.__notify("Daemon Starting, client "+self.conf.get_client())
 
-		self.__notify("Daemon Starting")
-		while(loop):
+		while(1):
 
-			# DEBUG print "Check RSS: "+str(datetime.datetime.now())
 			# 1- Download RSS feeds
 			# 1.1 Open it
 			
 			url_found = False
-			# Try until you've found an url rss that works else sleep
+			# Try until you've found an url rss that works else take a nap
 			for rss_url in self.rss_urls:
 
 				# Assume that the url is unreachble after 10 seconds	
@@ -159,28 +160,15 @@ class RSS_Daemon(Daemon):
 					for serie in download_list:
 						tv = tvs[serie.replace(' ','')]				
 						message = str(tv)
-						# redirect the std output and std error to /dev/null because deluge give some message error
-						# which not depend on this script so we ignore the messages
-						# the last & is used to put it in background.
-						# NOTE it'll be removed, the daemon redirect all streams to null :)
-						shell_command = self.conf.get_cl_command()+" "+tv.get_torrent()+" >& /dev/null &"
+						# Put the client in background mode
+						shell_command = self.conf.get_cl_command()+" "+tv.get_torrent()+" &"
 						self.__notify(message)		
 						os.system(shell_command)
 			
 	
 			# check time is in minutes
-			delay = self.conf.get_time()			
-		
-			# See in the future :D
-			future = datetime.timedelta(minutes = delay) + datetime.datetime.now()
-	
-			while(1):
-				if future <= datetime.datetime.now():
-					# time out
-					break
-				# DEBUG print "Nap Time"
-				time.sleep(1)
-				# DEBUG print "Wake Up"
-	
+			time.sleep(self.conf.get_time()*60)		
+
+			
 
 

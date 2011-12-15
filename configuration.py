@@ -5,13 +5,14 @@ try:
 	import string
 	from xml.dom.minidom import parseString, Document
 	from clients import *
+	from my_xml_parser import MyXmlParser
 except ImportError, e:
 	print "ERROR!!! Missing module : ",format(e.message[16:])
 	sys.exit(1)
 
 """ Class to store and manage the configuration """
 
-class Setup:
+class Setup(MyXmlParser):
 	""" This class is used to store the configuration parameters 
 		time -> it's how much it must sleep until it can scan again the feeds
 		default-client -> the bittorrent client 
@@ -20,6 +21,7 @@ class Setup:
 
 	def __init__(self):
 		" Automatically retrieve the information about the configuration in configuration.xml"
+		MyXmlParser.__init__(self,"configuration.xml")
 		self.time = 0
 		self.default_client = ""
 		self.client_command = ""
@@ -34,13 +36,6 @@ class Setup:
 		value = Document().createTextNode(tag_value)
 		tag.appendChild(value)
 
-	def __clean(self, string):
-		""" remove \n,\t and blank space from a string """
-
-		string = string.replace('\n','')
-		string = string.replace('\t','')
-		string = string.replace(' ','')
-		return string
 
 	def __client(self):
 		clients_list = read_clients()
@@ -71,7 +66,6 @@ class Setup:
 			sys.exit(2)
 
 	def __getText(nodelist):
-    		rc = []
 		for node in nodelist:
 		        if node.nodeType == node.TEXT_NODE:
 		            return node.data
@@ -102,34 +96,20 @@ class Setup:
 
 	def read_conf(self):
 		""" Retrieve configuration parameters from configuration.xml """
-	
+		
 		# if the file doesn't exsist create it with default value
 		if not os.path.isfile("configuration.xml"):
 			print "Configuration file - CREATE"
 			self.set_default()
-		try:
-			# open the xml file for reading:
-			file = open('configuration.xml','r')
-			data = file.read()
-			# close file cause we dont need it anymore
-			file.close()
-		except IOError:
-			print "Some error is occured trying to open configuration.xml"
-		        sys.exit(2)
-
-		# parse the xml
-		dom = parseString(data)
-
-		time_to_sleep = self.__getText( dom.getElementsByTagName('check_time')[0].childNodes )
-		client  = self.__getText( dom.getElementsByTagName('client_bt')[0].childNodes )
-		command = self.__getText( dom.getElementsByTagName('client_cmd')[0].childNodes )
-		last_feed = self.__getText( dom.getElementsByTagName('last_feed')[0].childNodes )
-				
+		else:
+			self.refresh_data()
+	
 		# non so perché ma mi mette anche i \n, \t and white space
-		self.time = self.__clean(time_to_sleep)
-		self.default_client = self.__clean(client)
-		self.client_command = self.__clean(command)
-		self.last_feed = self.__clean(last_feed)
+		self.time = self.get_field("check_time",['\n','\t',' '])
+		self.default_client = self.get_field("client_bt",['\n','\t',' '])
+		self.client_command = self.get_field("client_cmd",['\n','\t',' '])
+		self.last_feed = self.get_field("last_feed",['\n','\t',' '])
+				
 
 
 	def save(self):

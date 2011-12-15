@@ -1,8 +1,8 @@
 TVRAD - TV-Show RSS Auto Downloader
 
 Date : 2011
-Version : 0.1
-Require : Python
+Version : 0.2
+Require : Python 2.6 - 2.7
 
 DESCRIPTION
 -----------
@@ -23,6 +23,23 @@ Ktorrent
 QBittorrent
 
 
+SETUP CLIENT
+------------
+
+Usually when you add a torrent the client will ask you if you want download the torrent and where you want to put it. If you want disable this option take a look at the following istructions.
+
+
+TRANSMISSION
+Edit -> Preferences -> Panel Torrents -> Uncheck "Show options dialog"
+
+DELUGE
+Edit -> Preferences -> Interface -> Uncheck "Show always" in "Add torrent"
+
+Qbittorrent
+Tools -> Options -> Download Uncheck "Display torrent content and some options"
+I suggest to check this option, apply the change and uncheck the option and re-apply the change because sometimes it didn't work.
+
+
 HOW TO USE
 ----------
 
@@ -30,11 +47,13 @@ As a daemon it perform start and stop actions.
 
 To start the daemon open the shell, go where you've copied this directory and type :
 
-	python .py start
+	python tsrad.py start
 
 to stop it 
 	
-	python .py stop
+	python tsrad.py stop
+
+At the first start probably (the configuration file should be "empty") it'll ask which client bittorrent you want to use. Obviously it check if any of them are installed in your system. To make sure it happens you can delete configuration.xml, the daemon create one and ask you which client you want to use.
 
 Add/Remove/modify a tv-show
 For now the only way is to modify telefilm.xml that you can find in this direcory. This file is an XML file composed with entry like the following :
@@ -44,8 +63,40 @@ For now the only way is to modify telefilm.xml that you can find in this direcor
 		<quality>QUALITY</quality>
 	</serie>
 
-So if you want add a tv-show you must add an entry like this. The quality field is ued to know which version (Normal - 720p or 1080p ) of releases you want to download. 
+So if you want add a tv-show you must add an entry like this. The quality field is used to know which version (Normal - 720p or 1080p ) of releases you want to download. 
 When you do it stop the daemon and when you've done restart it. This procedure is necessary to avoid inconsisten data.
+
+NOTE
+When you write down the title please use the same used in eztv else the match can't be done.
+
+EXAMPLE
+If you want to add "How I Met Your Mother" don't write "how i met your mother",or others, because this doesn't match.
+In the next version this issue will be fixed.
+
+CONFIGURATION FILE
+------------------
+
+The configuration file is configuration.xml, it contains the following informations
+	- check time 	 : this time indicate how often check the rss
+	- client	 : client name
+	- client command : command to execute the client bittorrent.
+	- last feed 	 : date about last feed read, it's necessary to not re-scan older feeds.
+
+Because it's an alpha if you want to change client or change the check time you must change the configuration.xml
+
+
+ADD UNSUPPORTED CLIENT
+----------------------
+
+If you use a client that isn't supported yet you can modify the clients.xml file adding an entry like 
+
+	<client>
+		<name>CLIENT_NAME</name>
+		<command>SHELL_COMMAND_TO_EXECUTE_CLIENT</command>
+	</client>
+
+it should be works.
+
 
 CHANGELOG
 ---------
@@ -57,8 +108,20 @@ VERSION 0.1
 + Only start and stop actions
 + Use XML file to store configuration, tv-shows list and client specifications
 
+VERSION 0.2
++ Active waiting removed
++ Improved xml data retrieval
+
+
+THANKS
+------
+Sander Marechal
+The part about "daemonize" is taken from a work of Sander Marechal, more precisely from one of his articles that you can find at the following url
+http://www.jejik.com/articles/2007/02/a_simple_unix_linux_daemon_in_python/
+
 
 LICENSE GPLv2
+
 
 CONTACT ME 
 ----------
