@@ -70,6 +70,11 @@ class Setup:
 			self.__client()
 			sys.exit(2)
 
+	def __getText(nodelist):
+    		rc = []
+		for node in nodelist:
+		        if node.nodeType == node.TEXT_NODE:
+		            return node.data
 
 	def set_time(self, time):
 		self.time = time
@@ -114,20 +119,11 @@ class Setup:
 
 		# parse the xml
 		dom = parseString(data)
-	
-		# retrieve the first xml tag (<tag>data</tag>) that the parser finds with name tagName:
-		xmlTag = dom.getElementsByTagName('check_time')[0].toxml()
-		# strip off the tag (<tag>data</tag>  --->   data):
-		time_to_sleep = xmlTag.replace('<check_time>','').replace('</check_time>','')
 
-		xmlTag = dom.getElementsByTagName('client_bt')[0].toxml()
-		client = xmlTag.replace('<client_bt>','').replace('</client_bt>','')
-
-		xmlTag = dom.getElementsByTagName('client_cmd')[0].toxml()
-		command = xmlTag.replace('<client_cmd>','').replace('</client_cmd>','')
-
-		xmlTag = dom.getElementsByTagName('last_feed')[0].toxml()
-		last_feed = xmlTag.replace('<last_feed>','').replace('</last_feed>','')
+		time_to_sleep = self.__getText( dom.getElementsByTagName('check_time')[0].childNodes )
+		client  = self.__getText( dom.getElementsByTagName('client_bt')[0].childNodes )
+		command = self.__getText( dom.getElementsByTagName('client_cmd')[0].childNodes )
+		last_feed = self.__getText( dom.getElementsByTagName('last_feed')[0].childNodes )
 				
 		# non so perché ma mi mette anche i \n, \t and white space
 		self.time = self.__clean(time_to_sleep)
