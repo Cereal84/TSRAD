@@ -37,7 +37,7 @@ Edit -> Preferences -> Interface -> Uncheck "Show always" in "Add torrent"
 
 Qbittorrent
 Tools -> Options -> Download Uncheck "Display torrent content and some options"
-I suggest to check this option, apply the change and uncheck the option and re-apply the change because sometimes it didn't work.
+I suggest to check this option, apply the change and uncheck the option and re-apply the change because sometimes it doesn't work.
 
 
 HOW TO USE
@@ -67,7 +67,7 @@ So if you want add a tv-show you must add an entry like this. The quality field 
 When you do it stop the daemon and when you've done restart it. This procedure is necessary to avoid inconsisten data.
 
 NOTE
-When you write down the title please use the same used in eztv else the match can't be done.
+When you write down the title please use the same used in eztv otherwise the match can't be done.
 
 EXAMPLE
 If you want to add "How I Met Your Mother" don't write "how i met your mother",or others, because this doesn't match.
