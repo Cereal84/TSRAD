@@ -67,11 +67,9 @@ So if you want add a tv-show you must add an entry like this. The quality field 
 When you do it stop the daemon and when you've done restart it. This procedure is necessary to avoid inconsisten data.
 
 NOTE
-When you write down the title please use the same used in eztv otherwise the match can't be done.
+With the second version you can write the tv-show's title in any format except l33t. For who don't know the l33t please go to :
+	http://en.wikipedia.org/wiki/Leet .
 
-EXAMPLE
-If you want to add "How I Met Your Mother" don't write "how i met your mother",or others, because this doesn't match.
-In the next version this issue will be fixed.
 
 CONFIGURATION FILE
 ------------------
@@ -111,7 +109,7 @@ VERSION 0.1
 VERSION 0.2
 + Active waiting removed
 + Improved xml data retrieval
-
++ improved title match, now you can write a tv_show's title in any format ( NOT l33t )
 
 THANKS
 ------
