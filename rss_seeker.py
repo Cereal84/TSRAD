@@ -77,8 +77,8 @@ class RSS_Daemon(Daemon):
 	
 		download_list = []
 		for show in self.catalog:
-			if show.replace(' ','') in lista:
-				download_list.append(show.replace(' ',''))
+			if show in lista:
+				download_list.append(show)
 			
 		return download_list
 
@@ -120,9 +120,6 @@ class RSS_Daemon(Daemon):
 
 
 			# 1.2 check if the rss is updated
-			#if (last_feed == feeds.entries[0].updated) and (events.get_tv_changes() != 0) :
-			#	print "devo controllare nei vecchi feed solo le nuove serie"
-
 			if (str(last_feed) != str(feeds.entries[0].updated).replace(' ','') ):			
 
 				tvs = {}	
@@ -133,6 +130,7 @@ class RSS_Daemon(Daemon):
 						episode = re.findall(r'\d+x\d+',tv.title)
 						split = re.split(r'\d+x\d+',tv.title)
 						resto = split.pop()
+
 						if len(split)>0:	
 							quality = re.match(r'..720P', resto)
 							if quality:
@@ -140,8 +138,11 @@ class RSS_Daemon(Daemon):
 								#print str(split[0])+' '+str(episode[0])+' 720p'
 							else :
 								tvshow = TvShow(split[0],episode[0],"Normal",tv.link)
-		
-							tvs[split[0].replace(' ', '')+tvshow.get_quality()] = tvshow
+							
+							# using lower etc the match can be done with any format of title
+							key = (split[0].replace(' ', '')+tvshow.get_quality()).lower() 
+							tvs[key] = tvshow
+
 					else:
 						# old rss_feed so skip it
 						break
@@ -158,7 +159,7 @@ class RSS_Daemon(Daemon):
 				# 3- Notify it using pynotify
 				if len(download_list)>0:
 					for serie in download_list:
-						tv = tvs[serie.replace(' ','')]				
+						tv = tvs[serie.lower()]				
 						message = str(tv)
 						# Put the client in background mode
 						shell_command = self.conf.get_cl_command()+" "+tv.get_torrent()+" &"

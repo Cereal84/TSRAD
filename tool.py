@@ -20,7 +20,8 @@ def catalogo():
 	entries = parser.get_list(n_series,['title','quality'],['\n','\t'])
 	catalog = []
 	for serie in entries:
-		catalog.append(serie['title']+serie['quality'])
+		key = ((serie['title']+serie['quality']).replace(' ','')).lower()
+		catalog.append(key)
 	
 
 	return catalog
