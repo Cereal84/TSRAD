@@ -55,6 +55,20 @@ to stop it
 
 At the first start probably (the configuration file should be "empty") it'll ask which client bittorrent you want to use. Obviously it check if any of them are installed in your system. To make sure it happens you can delete configuration.xml, the daemon create one and ask you which client you want to use.
 
+[NOTE]
+For KDE users, there's some problem with initialization. I don't know why but KDE returns false negative about the bittorrent clients so I invite you to write down in configuration.xml the client-name and the command  as following example :
+
+  ...
+  <client_bt>
+	ktorrent
+  </client_bt>
+  <client_cmd>
+	ktorrent
+  </client_cmd>
+  ...
+ 
+I'll try to fix this bug.
+
 Add/Remove/modify a tv-show
 For now the only way is to modify telefilm.xml that you can find in this direcory. This file is an XML file composed with entry like the following :
 
