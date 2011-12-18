@@ -67,7 +67,7 @@ class Daemon:
 		so = file(self.stdout, 'a+')
 		se = file(self.stderr, 'a+', 0)
 
-		# to see debug print- comment this 3 rows
+		# to see DEBUG print- comment this 3 rows
 		os.dup2(si.fileno(), sys.stdin.fileno())
 		os.dup2(so.fileno(), sys.stdout.fileno())
 		os.dup2(se.fileno(), sys.stderr.fileno())
@@ -126,8 +126,9 @@ class Daemon:
 				os.kill(pid, SIGTERM)
 				time.sleep(0.1)
 		except OSError, err:
-			err = str(err)
-			if err.find("No such process") > 0:
+			#err = str(err)
+			#if err.find("No such process") > 0:
+			if err.errno == 3:
 				if os.path.exists(self.pidfile):
 					os.remove(self.pidfile)
 			else:

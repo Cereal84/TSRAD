@@ -12,14 +12,17 @@ except ImportError, e:
 
 if __name__ == "__main__":
 
-	conf = Setup()
-	daemon = RSS_Daemon(conf)
 	if len(sys.argv) == 2:
 		if 'start' == sys.argv[1]:	
+			conf = Setup()
+			daemon = RSS_Daemon(conf)
 			daemon.start()
 		elif 'stop' == sys.argv[1]:
+			daemon = Daemon('daemon-rss.pid')
 			daemon.stop()
 		elif 'restart' == sys.argv[1]:
+			conf = Setup()
+			daemon = RSS_Daemon(conf)
 			daemon.restart()
 		else:
 			print "Unknown command"

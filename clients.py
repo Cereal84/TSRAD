@@ -31,7 +31,7 @@ def find_clients(client_list):
 
 	for client in client_list.keys():
 		check = "/usr/bin/"+client
-		if not os.path.exists(check):
+		if not os.path.isfile(check):
 			del client_list[client]
 
 def choose_client(client_list):

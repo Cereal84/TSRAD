@@ -47,7 +47,7 @@ class Setup(MyXmlParser):
 			self.save()
 		else:
 			print "There isn't bittorrent client supported installed on your system."
-			print "Install one of this clients:"
+			print "Install one of these clients:"
 			for name in clients_supported:
 				print name
 			sys.exit(2)
@@ -59,7 +59,7 @@ class Setup(MyXmlParser):
 			self.__client()
 	
 		# check inf the default client is still installed
-		if not os.path.exists("/usr/bin/"+self.get_client()):
+		if not os.path.isfile("/usr/bin/"+self.get_client()):
 			print self.get_client()+" was set as default but isn't installed."
 			print "Please install it or choose another one"
 			self.__client()
