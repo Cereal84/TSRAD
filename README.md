@@ -1,4 +1,5 @@
 TSRAD - TV-Show RSS Auto Downloader
+===================================
 
 Date : 2011
 Version : 0.2
@@ -17,10 +18,10 @@ BITTORRENT CLIENT SUPPORTED
 
 To download torrent file you need one of this client bittorrent:
 
-Transmission
-Deluge
-Ktorrent
-QBittorrent
+* Transmission
+* Deluge
+* Ktorrent
+* QBittorrent
 
 
 SETUP CLIENT
@@ -30,13 +31,14 @@ Usually when you add a torrent the client will ask you if you want download the 
 
 
 TRANSMISSION
-Edit -> Preferences -> Panel Torrents -> Uncheck "Show options dialog"
+		Edit -> Preferences -> Panel Torrents -> Uncheck "Show options dialog"
 
 DELUGE
-Edit -> Preferences -> Interface -> Uncheck "Show always" in "Add torrent"
+		Edit -> Preferences -> Interface -> Uncheck "Show always" in "Add torrent"
 
 Qbittorrent
-Tools -> Options -> Download Uncheck "Display torrent content and some options"
+		Tools -> Options -> Download Uncheck "Display torrent content and some options"
+
 I suggest to check this option, apply the change and uncheck the option and re-apply the change because sometimes it doesn't work.
 
 
@@ -47,11 +49,11 @@ As a daemon it perform start and stop actions.
 
 To start the daemon open the shell, go where you've copied this directory and type :
 
-	python tsrad.py start
+		python tsrad.py start
 
 to stop it 
 	
-	python tsrad.py stop
+		python tsrad.py stop
 
 At the first start probably (the configuration file should be "empty") it'll ask which client bittorrent you want to use. Obviously it check if any of them are installed in your system. To make sure it happens you can delete configuration.xml, the daemon create one and ask you which client you want to use.
 
@@ -81,7 +83,7 @@ So if you want add a tv-show you must add an entry like this. The quality field 
 When you do it stop the daemon and when you've done restart it. This procedure is necessary to avoid inconsisten data.
 
 NOTE
-With the second version you can write the tv-show's title in any format except l33t. For who don't know the l33t please go to :
+With the second version you can write the tv-show's title in any format except l33t. For who doesn't know the l33t please go to :
 	http://en.wikipedia.org/wiki/Leet .
 
 
@@ -107,7 +109,7 @@ If you use a client that isn't supported yet you can modify the clients.xml file
 		<command>SHELL_COMMAND_TO_EXECUTE_CLIENT</command>
 	</client>
 
-it should be works.
+it should works.
 
 
 CHANGELOG
@@ -125,6 +127,12 @@ VERSION 0.2
 + Improved xml data retrieval
 + improved title match, now you can write a tv_show's title in any format ( NOT l33t )
 
+
+VERSION 0.3
+
+- Abbandoned XML
++ Use of SQLite 3
+
 THANKS
 ------
 Sander Marechal
@@ -135,8 +143,8 @@ http://www.jejik.com/articles/2007/02/a_simple_unix_linux_daemon_in_python/
 LICENSE GPLv2
 
 
-CONTACT ME 
-----------
+CONTACT 
+-------
 
 alessandro.pischedda@gmail.com
 Alessandro Pischedda
